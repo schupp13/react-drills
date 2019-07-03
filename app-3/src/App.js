@@ -1,18 +1,41 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      stuff: ["tacos", "shoes", "watermelon", "toothbrush", "toilet paper"],
+      userInput: ''
+    }
+  }
+
+  changeHandler = (e) =>{
+    this.setState({
+      userInput: e.target.value,
+    })
+    
+  }
+
+  filterList = () =>{
+    let map = this.state.stuff.map((value, i) =>{
+      // startsWith could use if you wanted to be more strict with search
+      if(value.includes(this.state.userInput)){
+        return <h2 key={i}>{value}</h2>
+      }
+      
+    })
+    return map;
+    }
+
+ 
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>App 3</h1>
+        <input onChange={this.changeHandler} />
+        {this.filterList()}
       </div>
     );
   }

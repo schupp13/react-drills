@@ -1,18 +1,48 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Todo from './components/Todo'
 
 class App extends Component {
+  
+  constructor(){
+    super();
+    this.state = {
+      todo: ['Cheese', 'Yarn', 'Cat', 'Mouse'],
+      userInput: ''
+    }
+  }
+
+  display = () =>{
+    let map = this.state.todo.map((value)=>{
+      return <li>{value}</li>;
+    });
+    return map;
+  }
+
+  addTodo = () =>{
+    this.setState({todo:[...this.state.todo, this.state.userInput]
+      
+  });
+  
+    
+
+
+}
+
+  changeHandler = (e) =>{
+    this.setState({userInput: e.target.value})
+    
+    
+  }
+
+  
+    
+  
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Todo list={this.display()} changeHandler={this.changeHandler}  addTodo={this.addTodo} value={this.state.userInput} />
+        
       </div>
     );
   }
